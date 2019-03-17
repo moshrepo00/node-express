@@ -8,6 +8,8 @@ router.post('/create', product_controller.product_create);
 
 // a simple test url to check that all of our files are communicating correctly.
 
+router.get('/all', product_controller.getProducts);
+
 router.get('/:id', product_controller.product_details);
 
 // router.get('/all-products', product_controller.all_products);
