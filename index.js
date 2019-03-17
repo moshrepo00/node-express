@@ -1,5 +1,6 @@
 // app.js
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 // initialize our express app
 const product = require('./routes/product.route'); // Imports routes for the products
@@ -19,6 +20,23 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+//app.user(bodyParser.json());
+// after the code that uses bodyParser and other cool stuff
+var originsWhitelist = [
+	'http://localhost:4200', //this is my front-end url for development
+	'http://www.myproductionurl.com'
+];
+var corsOptions = {
+	origin: function(origin, callback) {
+		var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+		callback(null, isWhitelisted);
+	},
+	credentials: true
+};
+//here is the magic
+app.use(cors(corsOptions));
+
 app.use('/products', product);
 
 let port = 8000;
