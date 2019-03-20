@@ -31,6 +31,20 @@ exports.getProducts = function(req, res, next) {
 	});
 };
 
+exports.product_update = function(req, res, next) {
+	Product.findByIdAndUpdate(req.params.id, { $set: req.body }, function(err, product) {
+		if (err) return next(err);
+		res.send('Product udpated.');
+	});
+};
+
+exports.product_delete = function(req, res) {
+	Product.findByIdAndRemove(req.params.id, function(err) {
+		if (err) return next(err);
+		res.send('Deleted successfully!');
+	});
+};
+
 exports.test = function(req, res) {
 	res.send('Greetings from the Test controller!');
 };
