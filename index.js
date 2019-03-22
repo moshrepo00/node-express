@@ -4,6 +4,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 // initialize our express app
 const product = require('./routes/product.route'); // Imports routes for the products
+const event = require('./routes/event.route'); // Imports routes for the products
 
 const app = express();
 
@@ -38,6 +39,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 app.use('/products', product);
+app.use('/events', event);
 
 let port = 8000;
 
