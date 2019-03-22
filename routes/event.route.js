@@ -21,5 +21,3 @@ router.delete('/:id/delete', event_controller.event_delete);
 router.get('/test', event_controller.test);
 
 module.exports = router;
-
-router.delete('/:id/delete', event_controller.event_delete);
