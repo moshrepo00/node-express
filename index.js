@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const product = require('./routes/product.route'); // Imports routes for the products
 const event = require('./routes/event.route'); // Imports routes for the products
 const ticket = require('./routes/ticket.route'); // Imports routes for the products
+const guest = require('./routes/guest.route'); // Imports routes for the products
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use(cors(corsOptions));
 app.use('/products', product);
 app.use('/events', event);
 app.use('/tickets', ticket);
+app.use('/guests', guest);
 
 let port = 8000;
 
