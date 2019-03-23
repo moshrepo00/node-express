@@ -4,9 +4,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 // initialize our express app
 const product = require('./routes/product.route'); // Imports routes for the products
-const event = require('./routes/event.route'); // Imports routes for the products
 const ticket = require('./routes/ticket.route'); // Imports routes for the products
 const guest = require('./routes/guest.route'); // Imports routes for the products
+const event = require('./routes/event.route'); // Imports routes for the products
 
 const app = express();
 
