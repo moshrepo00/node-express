@@ -13,21 +13,28 @@ exports.event_create = function(req, res, next) {
 		description: req.body.description
 	});
 
-	Guest.findById('5c95d86a6da5bf4a4a2b2521', (err, guest) => {
+	event.save(function(err) {
 		if (err) {
-			console.log(err);
-		} else {
-			console.log('new', guest);
-			event['guests'].push(guest);
-			console.log('final event before save', event);
-			event.save(function(err) {
-				if (err) {
-					return next(err);
-				}
-				res.send('event Created successfully');
-			});
+			return next(err);
 		}
+		res.send('event Created successfully');
 	});
+
+	// Guest.findById('5c95d86a6da5bf4a4a2b2521', (err, guest) => {
+	// 	if (err) {
+	// 		console.log(err);
+	// 	} else {
+	// 		console.log('new', guest);
+	// 		event['guests'].push(guest);
+	// 		console.log('final event before save', event);
+	// 		event.save(function(err) {
+	// 			if (err) {
+	// 				return next(err);
+	// 			}
+	// 			res.send('event Created successfully');
+	// 		});
+	// 	}
+	// });
 };
 
 exports.event_details = function(req, res, next) {

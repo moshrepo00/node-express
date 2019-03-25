@@ -14,9 +14,9 @@ const app = express();
 const mongoose = require('mongoose');
 
 // Set up mongoose connection
-let dev_db_url = 'mongodb+srv://mos:test@cluster0-cgltt.mongodb.net/test?retryWrites=true';
+let dev_db_url = 'mongodb+srv://mos:test@cluster0-cgltt.mongodb.net/event-ticketing-database?retryWrites=true';
 let mongoDB = process.env.MONGODB_URI || dev_db_url;
-mongoose.connect(mongoDB);
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -42,7 +42,7 @@ app.use(cors(corsOptions));
 
 app.use('/products', product);
 app.use('/events', event);
-app.use('/tickets', ticket);
+app.use('/events/:id/tickets', ticket);
 app.use('/guests', guest);
 
 let port = 8000;

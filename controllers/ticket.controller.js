@@ -1,4 +1,5 @@
 const Ticket = require('../models/ticket.model');
+const Event = require('../models/event.model');
 
 //Simple version, without validation or sanitation
 
@@ -8,11 +9,35 @@ exports.ticket_create = function(req, res, next) {
 		available: req.body.available
 	});
 
-	ticket.save(function(err) {
-		if (err) {
-			return next(err);
-		}
-		res.send('ticket Created successfully');
+	console.log('before exec,', req.params.id);
+	// ticket.save(function(err) {
+	// 	if (err) {
+	// 		return next(err);
+	// 	}
+	// 	// event['tickets'].push(ticket);
+	// 	// event.save();
+	// 	// res.send('ticket Created successfully');
+	// });
+	Event.findById(req.params.id, (err, event) => {
+		ticket.save(function(err) {
+			if (err) {
+				const err = new Error('Not Found');
+				err.status = 404;
+				next(err);
+			}
+			// event['tickets'].push(ticket);
+			// event.save();
+			// res.send('ticket Created successfully');
+		});
+		console.log('params id', req.params);
+		console.log('event', event);
+		event['tickets'].push(ticket);
+		console.log('event beofre submission');
+		event.save((err) => {
+			if (err) console.log(err);
+			// res.send('ticket Created successfully', event);
+			res.status(200).send(event);
+		});
 	});
 };
 
@@ -25,6 +50,7 @@ exports.ticket_details = function(req, res, next) {
 };
 
 exports.gettickets = function(req, res, next) {
+	console.log('request params', req.params);
 	Ticket.find({}, function(err, tickets) {
 		if (err) return next(err);
 		res.send(tickets);

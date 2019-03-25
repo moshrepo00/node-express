@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 // Require the controllers WHICH WE DID NOT CREATE YET!!
 const ticket_controller = require('../controllers/ticket.controller');
