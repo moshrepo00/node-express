@@ -1,5 +1,6 @@
 const Event = require('../models/event.model');
-const Guest = require('../models/guest.model');
+// const Guest = require('../models/guest.model');
+// const Ticket = require('../models/ticket.model');
 
 //Simple version, without validation or sanitation
 
@@ -46,8 +47,11 @@ exports.event_details = function(req, res, next) {
 };
 
 exports.getevents = function(req, res, next) {
-	Event.find({}, function(err, events) {
+	Event.find({}).populate('tickets').exec(function(err, events) {
 		if (err) return next(err);
+		events[0].tickets.forEach((item) => {
+			console.log(item._id.toString());
+		});
 		res.send(events);
 	});
 };
