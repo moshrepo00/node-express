@@ -28,7 +28,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // after the code that uses bodyParser and other cool stuff
 var originsWhitelist = [
 	'http://localhost:4200', //this is my front-end url for development
-	'http://www.myproductionurl.com'
+	'http://www.angular-event.herokuapp.com',
+	'https://www.angular-event.herokuapp.com'
 ];
 var corsOptions = {
 	origin: function(origin, callback) {
