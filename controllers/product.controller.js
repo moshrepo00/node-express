@@ -17,7 +17,6 @@ exports.product_create = function(req, res, next) {
 };
 
 exports.product_details = function(req, res, next) {
-	console.log('the ID in the request', req.params.id);
 	Product.findById(req.params.id, function(err, product) {
 		if (err) return next(err);
 		res.send(product);

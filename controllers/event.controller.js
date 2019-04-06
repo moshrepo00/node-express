@@ -20,26 +20,9 @@ exports.event_create = function(req, res, next) {
 		}
 		res.send('event Created successfully');
 	});
-
-	// Guest.findById('5c95d86a6da5bf4a4a2b2521', (err, guest) => {
-	// 	if (err) {
-	// 		console.log(err);
-	// 	} else {
-	// 		console.log('new', guest);
-	// 		event['guests'].push(guest);
-	// 		console.log('final event before save', event);
-	// 		event.save(function(err) {
-	// 			if (err) {
-	// 				return next(err);
-	// 			}
-	// 			res.send('event Created successfully');
-	// 		});
-	// 	}
-	// });
 };
 
 exports.event_details = function(req, res, next) {
-	console.log('the ID in the request', req.params.id);
 	Event.findById(req.params.id, function(err, event) {
 		if (err) return next(err);
 		res.send(event);
@@ -49,9 +32,7 @@ exports.event_details = function(req, res, next) {
 exports.getevents = function(req, res, next) {
 	Event.find({}).populate('tickets').exec(function(err, events) {
 		if (err) return next(err);
-		events[0].tickets.forEach((item) => {
-			console.log(item._id.toString());
-		});
+		events[0].tickets.forEach((item) => {});
 		res.send(events);
 	});
 };

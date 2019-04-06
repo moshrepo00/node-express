@@ -19,7 +19,6 @@ exports.guest_create = function(req, res, next) {
 };
 
 exports.guest_details = function(req, res, next) {
-	console.log('the ID in the request', req.params.id);
 	Guest.findById(req.params.id, function(err, guest) {
 		if (err) return next(err);
 		res.send(guest);
