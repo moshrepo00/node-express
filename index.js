@@ -44,11 +44,13 @@ app.use('/events', event);
 app.use('/events/:id/tickets', ticket);
 app.use('/guests', guest);
 app.get('/', (req, res) => {
-	console.log('some testing');
 	res.send('Event ticketing server!');
 });
 let port = 8000;
 
-app.listen(port, () => {
-	console.log('Server is up and running on port number ' + port);
+app.listen(process.env.PORT || 8000, () => {
+	console.log('server is up and running on port 8000');
 });
+// app.listen(process.env.PORT || port, () => {
+// 	console.log('Server is up and running on port number ' + port);
+// });
