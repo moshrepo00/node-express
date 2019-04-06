@@ -41,11 +41,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // //here is the magic
 // app.use(cors(corsOptions));
 app.use(function(req, res, next) {
-	var allowedOrigins = [
-		'http://localhost:4200',
-		'https://www.angular-event.herokuapp.com',
-		'http://www.angular-event.herokuapp.com'
-	];
+	var allowedOrigins = [ 'http://localhost:4200', 'https://www.angular-event.herokuapp.com' ];
 	var origin = req.headers.origin;
 	if (allowedOrigins.indexOf(origin) > -1) {
 		res.setHeader('Access-Control-Allow-Origin', origin);
