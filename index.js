@@ -39,12 +39,11 @@ var corsOptions = {
 };
 //here is the magic
 app.use(cors(corsOptions));
-
 app.use('/products', product);
 app.use('/events', event);
 app.use('/events/:id/tickets', ticket);
 app.use('/guests', guest);
-app.use('/', (req, res) => {
+app.get('/', (req, res) => {
 	console.log('some testing');
 	res.send('Event ticketing server!');
 });
