@@ -26,20 +26,36 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 //app.user(bodyParser.json());
 // after the code that uses bodyParser and other cool stuff
-var originsWhitelist = [
-	'http://localhost:4200', //this is my front-end url for development
-	'http://www.angular-event.herokuapp.com',
-	'https://www.angular-event.herokuapp.com'
-];
-var corsOptions = {
-	origin: function(origin, callback) {
-		var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
-		callback(null, isWhitelisted);
-	},
-	credentials: true
-};
-//here is the magic
-app.use(cors(corsOptions));
+// var originsWhitelist = [
+// 	'http://localhost:4200', //this is my front-end url for development
+// 	'http://www.angular-event.herokuapp.com',
+// 	'https://www.angular-event.herokuapp.com'
+// ];
+// var corsOptions = {
+// 	origin: function(origin, callback) {
+// 		var isWhitelisted = originsWhitelist.indexOf(origin) !== -1;
+// 		callback(null, isWhitelisted);
+// 	},
+// 	credentials: true
+// };
+// //here is the magic
+// app.use(cors(corsOptions));
+app.use(function(req, res, next) {
+	var allowedOrigins = [
+		'http://localhost:4200',
+		'https://www.angular-event.herokuapp.com',
+		'http://www.angular-event.herokuapp.com'
+	];
+	var origin = req.headers.origin;
+	if (allowedOrigins.indexOf(origin) > -1) {
+		res.setHeader('Access-Control-Allow-Origin', origin);
+	}
+	//res.header('Access-Control-Allow-Origin', 'http://127.0.0.1:8020');
+	res.header('Access-Control-Allow-Methods', 'GET, OPTIONS');
+	res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+	res.header('Access-Control-Allow-Credentials', true);
+	return next();
+});
 app.use('/products', product);
 app.use('/events', event);
 app.use('/events/:id/tickets', ticket);
