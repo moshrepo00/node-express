@@ -56,7 +56,7 @@ exports.gettickets = function(req, res, next) {
 exports.ticket_update = function(req, res, next) {
 	Ticket.findByIdAndUpdate(req.params.id, { $set: req.body }, function(err, ticket) {
 		if (err) return next(err);
-		res.send('ticket udpated.');
+		res.end();
 	});
 };
 
