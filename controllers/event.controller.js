@@ -30,10 +30,10 @@ exports.event_details = function(req, res, next) {
 };
 
 exports.getevents = function(req, res, next) {
-	Event.find({}).populate('tickets').exec(function(err, events) {
+	Event.find({}).populate('tickets').populate('guests').exec(function(err, results) {
 		if (err) return next(err);
-		events[0].tickets.forEach((item) => {});
-		res.send(events);
+		// events[0].tickets.forEach((item) => {});
+		res.send(results);
 	});
 };
 

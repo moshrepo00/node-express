@@ -27,15 +27,15 @@ exports.ticket_create = function(req, res, next) {
 			// event['tickets'].push(ticket);
 			// event.save();
 			// res.send('ticket Created successfully');
+			event['tickets'].push(ticket);
+			event.save((err) => {
+				if (err) console.log(err);
+				// res.send('ticket Created successfully', event);
+				res.status(200).send(event);
+			});
 		});
 		// console.log('params id', req.params);
 		// console.log('event', event);
-		event['tickets'].push(ticket);
-		event.save((err) => {
-			if (err) console.log(err);
-			// res.send('ticket Created successfully', event);
-			res.status(200).send(event);
-		});
 	});
 };
 
@@ -49,14 +49,14 @@ exports.ticket_details = function(req, res, next) {
 exports.gettickets = function(req, res, next) {
 	Ticket.find({}, function(err, tickets) {
 		if (err) return next(err);
-		res.send(tickets);
+		res.status(200).send(ticket);
 	});
 };
 
 exports.ticket_update = function(req, res, next) {
 	Ticket.findByIdAndUpdate(req.params.id, { $set: req.body }, function(err, ticket) {
 		if (err) return next(err);
-		res.end();
+		res.send('ticket udpated.');
 	});
 };
 

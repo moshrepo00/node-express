@@ -59,7 +59,7 @@ app.use(function(req, res, next) {
 app.use('/products', product);
 app.use('/events', event);
 app.use('/events/:id/tickets', ticket);
-app.use('/guests', guest);
+app.use('/events/:id/guests', guest);
 app.get('/', (req, res) => {
 	res.send('Event ticketing server!');
 });
