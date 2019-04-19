@@ -7,7 +7,13 @@ const product = require('./routes/product.route'); // Imports routes for the pro
 const ticket = require('./routes/ticket.route'); // Imports routes for the products
 const guest = require('./routes/guest.route'); // Imports routes for the products
 const event = require('./routes/event.route'); // Imports routes for the products
+const middleware = require('./auth/middleware');
+const config = require('./auth/config');
+const auth = require('./auth/main');
 
+console.log('middleware', middleware);
+console.log('config', config);
+console.log('auth', auth);
 const app = express();
 
 // Set up mongoose connection
