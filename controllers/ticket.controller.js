@@ -24,18 +24,12 @@ exports.ticket_create = function(req, res, next) {
 				err.status = 404;
 				next(err);
 			}
-			// event['tickets'].push(ticket);
-			// event.save();
-			// res.send('ticket Created successfully');
 			event['tickets'].push(ticket);
 			event.save((err) => {
 				if (err) console.log(err);
-				// res.send('ticket Created successfully', event);
 				res.status(200).send(event);
 			});
 		});
-		// console.log('params id', req.params);
-		// console.log('event', event);
 	});
 };
 
@@ -49,7 +43,7 @@ exports.ticket_details = function(req, res, next) {
 exports.gettickets = function(req, res, next) {
 	Ticket.find({}, function(err, tickets) {
 		if (err) return next(err);
-		res.status(200).send(ticket);
+		res.status(200).send(tickets);
 	});
 };
 

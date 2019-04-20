@@ -9,13 +9,6 @@ const guest = require('./routes/guest.route'); // Imports routes for the product
 const events = require('./routes/event.route'); // Imports routes for the products
 const auth = require('./auth/routes');
 
-const middleware = require('./auth/middleware');
-const config = require('./auth/config');
-// const auth1 = require('./auth/main');
-
-console.log('middleware', middleware);
-console.log('config', config);
-// console.log('auth', auth);
 const app = express();
 
 // Set up mongoose connection
@@ -77,6 +70,3 @@ let port = 8000;
 app.listen(process.env.PORT || 8000, () => {
 	console.log('server is up and running on port 8000');
 });
-// app.listen(process.env.PORT || port, () => {
-// 	console.log('Server is up and running on port number ' + port);
-// });

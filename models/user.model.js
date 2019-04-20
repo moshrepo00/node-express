@@ -11,10 +11,5 @@ let UserSchema = new Schema({
 	hash_password: { type: String, required: true }
 });
 
-UserSchema.methods.comparePassword = (password, hash) => {
-	console.log('schema', console.log(this));
-	return bcrypt.compareSync(password, hash);
-};
-
 // Export the model
 module.exports = mongoose.model('User', UserSchema);

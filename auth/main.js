@@ -19,7 +19,6 @@ exports.register = function(req, res) {
 };
 
 exports.sign_in = function(req, res) {
-	console.log('req body email', req.body.email);
 	User.findOne(
 		{
 			email: req.body.email
@@ -29,8 +28,6 @@ exports.sign_in = function(req, res) {
 			if (!user) {
 				res.status(401).json({ message: 'Authentication failed. User not found.' });
 			} else if (user) {
-				console.log(user);
-				console.log('compare password', comparePassword);
 				if (!comparePassword(req.body.password, user.hash_password)) {
 					res.status(401).json({ message: 'Authentication failed. Wrong password.' });
 				} else {
