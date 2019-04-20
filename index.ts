@@ -6,14 +6,16 @@ const bodyParser = require('body-parser');
 const product = require('./routes/product.route'); // Imports routes for the products
 const ticket = require('./routes/ticket.route'); // Imports routes for the products
 const guest = require('./routes/guest.route'); // Imports routes for the products
-const event = require('./routes/event.route'); // Imports routes for the products
+const events = require('./routes/event.route'); // Imports routes for the products
+const auth = require('./auth/routes');
+
 const middleware = require('./auth/middleware');
 const config = require('./auth/config');
-const auth = require('./auth/main');
+// const auth1 = require('./auth/main');
 
 console.log('middleware', middleware);
 console.log('config', config);
-console.log('auth', auth);
+// console.log('auth', auth);
 const app = express();
 
 // Set up mongoose connection
@@ -63,9 +65,10 @@ app.use(function(req, res, next) {
 	return next();
 });
 app.use('/products', product);
-app.use('/events', event);
+app.use('/events', events);
 app.use('/events/:id/tickets', ticket);
 app.use('/events/:id/guests', guest);
+app.use('/login', auth);
 app.get('/', (req, res) => {
 	res.send('Event ticketing server!');
 });
