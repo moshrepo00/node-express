@@ -1,14 +1,9 @@
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-
 const middleware = require('../auth/middleware');
-const config = require('../auth/config');
-const auth = require('../auth/main');
 
 // Require the controllers WHICH WE DID NOT CREATE YET!!
 const event_controller = require('../controllers/event.controller');
-
-router.post('/login', auth.login);
 
 router.post('/create', event_controller.event_create);
 
@@ -16,14 +11,14 @@ router.post('/create', event_controller.event_create);
 
 router.get('/all', middleware.checkToken, event_controller.getevents);
 
-router.get('/:id', event_controller.event_details);
+router.get('/:id', middleware.checkToken, event_controller.event_details);
 
-router.put('/:id/update', event_controller.event_update);
+router.put('/:id/update', middleware.checkToken, event_controller.event_update);
 
-router.delete('/:id/delete', event_controller.event_delete);
+router.delete('/:id/delete', middleware.checkToken, event_controller.event_delete);
 
 // router.get('/all-events', event_controller.all_events);
 
-router.get('/test', event_controller.test);
+router.get('/test', middleware.checkToken, event_controller.test);
 
 module.exports = router;
