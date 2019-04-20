@@ -68,7 +68,7 @@ app.use('/products', product);
 app.use('/events', events);
 app.use('/events/:id/tickets', ticket);
 app.use('/events/:id/guests', guest);
-app.use('/login', auth);
+app.use('/auth', auth);
 app.get('/', (req, res) => {
 	res.send('Event ticketing server!');
 });
